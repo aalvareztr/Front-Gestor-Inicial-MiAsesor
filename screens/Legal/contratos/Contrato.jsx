@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Navigate, useNavigate, useParams } from 'react-router-dom'
-import Loading from '../../components/Loading';
+import Loading from '../../../components/Loading';
 
 const Contrato = () => {
 

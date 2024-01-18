@@ -5,31 +5,32 @@ import Loading from '../components/Loading'
 import AppRouter from '../router/AppRouter'
 import { server_url } from '../env'
 import axios from 'axios'
+import { jwtDecode } from 'jwt-decode'
 
 function App() {
-  const { setLogged } = useContext(AppContext);
-  const [ err,setErr ] = useState(false)
+  const { setLogged,setUserProp } = useContext(AppContext);
+  const [ err ] = useState(false)
   const [ loading,setLoading ] = useState(true);
 
   useEffect(() => {
     const tknData = getCookieData()
-    console.log(tknData)
-    tknData  === true ? verifyTkn() : denyAcces()
+    tknData ? verifyTkn(tknData) : denyAcces()
   }, [])
   
 
   //Obtener cookie almacenada, si existe true si no null 
   const getCookieData = () => {
     const jwtCookie = document.cookie.split('; ').find(row => row.startsWith('tkn='))
-    return jwtCookie ? true : null
+    return jwtCookie ? jwtCookie : null
   }
 
-
   //Verificar si el token esta autorizado
-  async function verifyTkn () {
+  async function verifyTkn (tknData) {
     console.log('verificanndo')
     try {      
       await axios.get(`${server_url}/api/check-auth`, { withCredentials: true })
+      const decode = jwtDecode(tknData)
+      setUserProp(decode)
       authAcces()
     } catch (err) {
       console.log(err)

@@ -1,22 +1,28 @@
-import React from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import HomeScreen from '../screens/HomeScreen'
-import ContratosList from '../screens/contratos/ContratosList'
-import Contrato from '../screens/contratos/Contrato'
-import ContratoPreview from '../screens/contratos/ContratoPreview'
+import React, { useContext } from 'react';
+import { AppContext } from '../context/AppContext';
+import Legal from '../views/Legal';
+import Ventas from '../views/Ventas';
+import Contabilidad from '../views/Contabilidad';
+
 const PrivateRoutes = () => {
+  
+  const { userProp } = useContext(AppContext);
+
+  function interfaceFilter (){
+    const { area } = userProp;
+    
+    switch (area) {
+      case "legal":
+        return <Legal/>
+      case "ventas":
+        return <Ventas/>
+      case "contabilidad":
+        return <Contabilidad/>
+    }
+  }
+  
   return (
-    <Routes>
-         {/*contratos*/}
-        <Route path='/' element={<HomeScreen/>}/>
-        <Route path='/contratos' element={<ContratosList/>}/>
-        <Route path='/contratos/:id' element={<Contrato/>}/>
-        <Route path='/contratos/imprimir/:id' element={<ContratoPreview/>}/>
-
-        {/*LOGIN*/}
-        <Route path='/login' element={<Navigate to='/'/>}/>
-
-    </Routes>
+    <> {interfaceFilter()} </>
   )
 }
 

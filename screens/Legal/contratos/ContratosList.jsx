@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import Loading from '../../components/Loading';
+import Loading from '../../../components/Loading';
 
 const ContratosList = () => {
   
@@ -16,12 +16,14 @@ const ContratosList = () => {
   
   async function getContratos (){
     try{
-      const response = await axios.get('http://localhost:3000/api/contratos');
+      const response = await axios.get('http://localhost:3000/api/contratos',{withCredentials:true});
       setContratos(response.data.contratos)
+      console.log(response.data.contratos)
     }catch(err){
       console.log(err)
     }finally{
-      setTimeout(()=>{setLoading(false)},3000)
+      //setTimeout(()=>{setLoading(false)},3000)
+      setLoading(false)
     }
   }
 
@@ -51,7 +53,7 @@ const ContratosList = () => {
                   <td style={{border:"1px solid black"}}>{item.razon_social}</td>
                   <td style={{border:"1px solid black"}}>Firmado</td>
                   <td style={{border:"1px solid black"}}>
-                    <NavLink to={`/contratos/${item.id}`}>Ver</NavLink>
+                    <NavLink to={`/contratos/${item.idContrato}`}>Ver</NavLink>
                   </td>
                 </tr>
               )

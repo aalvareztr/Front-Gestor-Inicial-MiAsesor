@@ -1,9 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Document,Text,Page,StyleSheet,Image, View, Font } from "@react-pdf/renderer";
-
-
-
-
 
 const styles = StyleSheet.create({
     page:{
@@ -57,7 +53,12 @@ const styles = StyleSheet.create({
 });
 
 
-const ContratoTemplate = () => {
+const ContratoTemplate = ({detail}) => {
+
+    useEffect(() => {
+      console.log(detail)
+    }, [])
+    
   return (
     <Document>
         <Page size="A4"  style={styles.page}>
@@ -68,12 +69,12 @@ const ContratoTemplate = () => {
                 <View style={styles.tableRow}>
                     <Text style={styles.tableHeader}>Nombre/Razon social</Text>
                     <View style={styles.tableSeparation}></View>
-                    <Text style={styles.tableData}>Dato</Text>
+                    <Text style={styles.tableData}>{detail.cliente.razon_social}</Text>
                 </View>
                 <View style={styles.tableRow}>
                     <Text style={styles.tableHeader}>RUT Empresa</Text>
                     <View style={styles.tableSeparation}></View>
-                    <Text style={styles.tableData}>Dato</Text>
+                    <Text style={styles.tableData}>{detail.cliente.rut}</Text>
                 </View>
                 <View style={styles.tableRow}>
                     <Text style={styles.tableHeader}>Representante legal</Text>
@@ -83,12 +84,12 @@ const ContratoTemplate = () => {
                 <View style={styles.tableRow}>
                     <Text style={styles.tableHeader}>Correo Electronico</Text>
                     <View style={styles.tableSeparation}></View>
-                    <Text style={styles.tableData}>Dato</Text>
+                    <Text style={styles.tableData}>{detail.cliente.mail}</Text>
                 </View>
                 <View style={styles.tableRow}>
                     <Text style={styles.tableHeader}>Telefono de conntacto</Text>
                     <View style={styles.tableSeparation}></View>
-                    <Text style={styles.tableData}>Dato</Text>
+                    <Text style={styles.tableData}>{detail.cliente.telefono}</Text>
                 </View>
             </View>
             <Text>DETALLE DE LOS SERVICIOS CONTRATADOS</Text>
@@ -96,17 +97,23 @@ const ContratoTemplate = () => {
                 <View style={styles.tableRow}>
                     <Text style={styles.tableHeader}>Nombre y precio del plan</Text>
                     <View style={styles.tableSeparation}></View>
-                    <Text style={styles.tableData}>Dato</Text>
+                    <View style={styles.tableData}>{
+                        detail.planes.map((plan,index)=>
+                            <Text key={index}>
+                                {plan.nombre} ${plan.precio} {plan.descripcion} {plan.mes_de_gracia}
+                            </Text>
+                        )
+                    }</View>
                 </View>
                 <View style={styles.tableRow}>
                     <Text style={styles.tableHeader}>Servicio adicional (fuera del plan)</Text>
                     <View style={styles.tableSeparation}></View>
-                    <Text style={styles.tableData}>Dato</Text>
+                    <Text style={styles.tableData}> </Text>
                 </View>
                 <View style={styles.tableRow}>
                     <Text style={styles.tableHeader}>Observaciones</Text>
                     <View style={styles.tableSeparation}></View>
-                    <Text style={styles.tableData}>Dato</Text>
+                    <Text style={styles.tableData}> </Text>
                 </View>
             </View>
             <Text>*Precio mensual por servicio</Text>

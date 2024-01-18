@@ -8,11 +8,12 @@ export const AppContextProvider = (props) =>{
     const [ logged,setLogged ] = useState(false);
 
     //Rol de usuario
-    const [ role,setRole ] = useState(null);
-    
+    const [ userProp,setUserProp ] = useState(null);
+
     return(
         <AppContext.Provider value={{
-            logged,setLogged
+            logged,setLogged,
+            userProp,setUserProp
         }}>
             {props.children}
         </AppContext.Provider>

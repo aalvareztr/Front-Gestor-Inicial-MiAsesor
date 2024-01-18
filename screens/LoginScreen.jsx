@@ -2,30 +2,34 @@ import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios';
 import { server_url } from '../env';
+import { jwtDecode } from "jwt-decode";
+import Swal from 'sweetalert2';
 
 const LoginScreen = () => {
 
-  const { logged,setLogged } = useContext(AppContext);
+  const { setLogged,setUserProp } = useContext(AppContext);
 
   const [ userData,setUserData ] = useState({username:'',password:''})
 
   function submit (e){
     e.preventDefault()
-    userData.username.trim() !== "" && userData.password.trim() !== "" ? login () : alert('debe rellenar todos los campos')
+    userData.username.trim() !== "" && userData.password.trim() !== "" ? login () : Swal.fire({title:"Error!",text:"Debes completar toodos los campos",icon:"error"})
   }
 
   async function login () {    
     try{
       const response = await axios.post(`${server_url}/api/login`,userData)
-      console.log(response)
-      //document.cookie =  `tkn=${response.data.token};path=/`
+      const decodedToken = jwtDecode(response.data.token);
+      setUserProp(decodedToken)
+      document.cookie =  `tkn=${response.data.token};path=/`
     }catch(err){
-      console.log(err)
-      //setLogged(false)
-    }finally{
-      //setLogged(true)
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.message,
+        icon: "error"
+      });
+      setLogged(false)
     }
-    
   }
 
   return (
