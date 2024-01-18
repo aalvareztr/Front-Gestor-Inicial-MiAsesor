@@ -4,10 +4,14 @@ import HomeScreen from '../screens/Legal/HomeScreen'
 import ContratosList from '../screens/Legal/contratos/ContratosList'
 import Contrato from '../screens/Legal/contratos/Contrato'
 import ContratoPreview from '../screens/Legal/contratos/ContratoPreview'
+import BarNav from '../screens/Legal/components/BarNav'
 
 const Legal = () => {
   return (
-    <Routes>
+    <>
+      <BarNav/>
+      <div>
+      <Routes>
         <Route path='/' element={<HomeScreen/>}/>
         <Route path='/login' element={<Navigate to='/'/>}/>
         {/*Ruta de contratos*/}
@@ -16,7 +20,11 @@ const Legal = () => {
         <Route path='/contratos/imprimir/:id' element={<ContratoPreview/>}/>
 
         <Route path='/*' element={<div>Nada que ver por aqui</div>}/>
-    </Routes>
+      </Routes>
+
+      </div>
+    </>
+    
   )
 }
 
