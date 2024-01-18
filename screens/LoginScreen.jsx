@@ -14,20 +14,18 @@ const LoginScreen = () => {
     userData.username.trim() !== "" && userData.password.trim() !== "" ? login () : alert('debe rellenar todos los campos')
   }
 
-
-  async function login () {
-    userData.username === "test" && userData.password === "1234" ? setLogged(true) : alert('contrasena o usuario incorrecto')
-    /*
+  async function login () {    
     try{
-      const response = await axios.put(`${server_url}/login`,userData)
+      const response = await axios.post(`${server_url}/api/login`,userData)
       console.log(response)
+      document.cookie =  `tkn=${response.data.token};path=/`
     }catch(err){
       console.log(err)
       setLogged(false)
     }finally{
       setLogged(true)
     }
-    */
+    
   }
 
   return (
