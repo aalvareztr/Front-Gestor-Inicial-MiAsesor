@@ -13,6 +13,7 @@ function App() {
 
   useEffect(() => {
     const tknData = getCookieData()
+    console.log(tknData)
     tknData  === true ? verifyTkn() : denyAcces()
   }, [])
   
@@ -28,9 +29,10 @@ function App() {
   async function verifyTkn () {
     console.log('verificanndo')
     try {      
-      const response = await axios.get(`${server_url}/api/check-auth`, { withCredentials: true })
-      response.data.ok === true ? authAcces() : denyAcces()
+      await axios.get(`${server_url}/api/check-auth`, { withCredentials: true })
+      authAcces()
     } catch (err) {
+      console.log(err)
       denyAcces()
     }
   } 

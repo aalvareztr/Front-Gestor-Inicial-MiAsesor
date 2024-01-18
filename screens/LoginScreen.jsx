@@ -18,12 +18,12 @@ const LoginScreen = () => {
     try{
       const response = await axios.post(`${server_url}/api/login`,userData)
       console.log(response)
-      document.cookie =  `tkn=${response.data.token};path=/`
+      //document.cookie =  `tkn=${response.data.token};path=/`
     }catch(err){
       console.log(err)
-      setLogged(false)
+      //setLogged(false)
     }finally{
-      setLogged(true)
+      //setLogged(true)
     }
     
   }
