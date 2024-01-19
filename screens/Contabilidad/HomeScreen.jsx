@@ -3,8 +3,10 @@ import React from 'react'
 const HomeScreen = () => {
   return (
     <>
-        <h1>Home Screen de Contabilidad</h1>
+      <h1>Home Screen de Contabilidad</h1>
+      
     </>
+    
   )
 }
 
