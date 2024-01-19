@@ -1,5 +1,6 @@
 /*LOADING SCREEN*/
 
+
 .loading_spinner_container {
     display: flex;
     align-items: center;
@@ -29,11 +30,20 @@
 
 .login_form{
     height: 80%;
-    width: 60%;
-    border: 1px solid black;
+    width: 500px;
+    border: 1px solid rgb(119, 118, 118);
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    justify-content: center;
+    border-radius: 10px;
 }
 
+.login_input{
+    padding: 9px 10px;
+}
 
 /*Bar Nav*/
 .bar_nav{

@@ -16,7 +16,7 @@ const PrivateRoutes = () => {
         return <Legal/>
       case "ventas":
         return <Ventas/>
-      case "contabilidad":
+      case "contable":
         return <Contabilidad/>
     }
   }
