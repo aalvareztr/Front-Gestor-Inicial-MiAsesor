@@ -21,7 +21,7 @@ const LoginScreen = () => {
   async function login () {
     setLoading(true)    
     try{
-      const response = await axios.post(`${server_url}/api/login`,userData)
+      const response = await axios.post(`${server_url}/login`,userData)
       const decodedToken = jwtDecode(response.data.token);
       setUserProp(decodedToken)
       document.cookie =  `tkn=${response.data.token};path=/`
